@@ -475,7 +475,7 @@ int32_t pinedio_digital_read(struct pinedio_inst *inst, uint32_t pin) {
 
   int32_t ret = usb_transfer(inst, __func__, sizeof(buf), sizeof(output), buf, output, true);
   if (ret < 0) {
-    fprintf(stderr, "Could not get input pins.\n");
+    fprintf(stderr, "pinedio_digital_read: Could not get input pins.\n");
     return ret;
   }
   // *input = ((output[2] & 0x80) << 16) | ((output[1] & 0xef) << 8) | output[0];
@@ -491,7 +491,7 @@ static int32_t pinedio_get_input(struct pinedio_inst *inst, uint32_t* input)
 
   int32_t ret = usb_transfer(inst, __func__, sizeof(buf), sizeof(output), buf, output, true);
   if (ret < 0) {
-    fprintf(stderr, "Could not get input pins.\n");
+    fprintf(stderr, "pinedio_get_input: Could not get input pins.\n");
   }
   *input = ((output[2] & 0x80) << 16) | ((output[1] & 0xef) << 8) | output[0];
   return ret;
